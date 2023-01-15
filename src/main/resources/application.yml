@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:realWorld
+    driver-class-name: org.h2.Driver
+    username: sa
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
