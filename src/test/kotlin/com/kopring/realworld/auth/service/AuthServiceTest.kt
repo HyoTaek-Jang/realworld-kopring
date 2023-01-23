@@ -2,7 +2,7 @@ package com.kopring.realworld.auth.service
 
 import com.kopring.realworld.auth.db.entity.Member
 import com.kopring.realworld.auth.db.repository.MemberRepository
-import com.kopring.realworld.auth.dto.RegisterRequest
+import com.kopring.realworld.auth.dto.request.RegisterRequest
 import com.kopring.realworld.auth.exception.ExistUserException
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThatThrownBy
@@ -32,7 +32,7 @@ internal class AuthServiceTest{
         `when`(memberRepository.save(any())).thenReturn(registerRequest.member)
 
         // then
-        assertThat(authService.register(registerRequest)).isNotNull
+        assertThat(authService.register(registerRequest.member)).isNotNull
     }
 
     @Test
@@ -42,7 +42,7 @@ internal class AuthServiceTest{
         `when`(memberRepository.findByEmail(registerRequest.member.email)).thenReturn(registerRequest.member)
 
         // then
-        assertThatThrownBy { authService.register(registerRequest) }
+        assertThatThrownBy { authService.register(registerRequest.member) }
             .isExactlyInstanceOf(ExistUserException::class.java)
     }
 }

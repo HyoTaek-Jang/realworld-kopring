@@ -2,7 +2,7 @@ package com.kopring.realworld.auth.service
 
 import com.kopring.realworld.auth.db.entity.Member
 import com.kopring.realworld.auth.db.repository.MemberRepository
-import com.kopring.realworld.auth.dto.LoginRequest
+import com.kopring.realworld.auth.dto.request.LoginRequest
 import com.kopring.realworld.auth.exception.ExistUserException
 import com.kopring.realworld.auth.exception.NotExistUserException
 import com.kopring.realworld.auth.exception.NotMatchPasswordException
@@ -22,8 +22,6 @@ class AuthService(val memberRepository: MemberRepository) {
     fun login(loginRequest: LoginRequest.Member): Member {
         val member = memberRepository.findByEmail(loginRequest.email) ?: throw NotExistUserException()
         if (member.password != loginRequest.password) throw NotMatchPasswordException()
-
-        // todo 토큰 발급
         return member
     }
 }
