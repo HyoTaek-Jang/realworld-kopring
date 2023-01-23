@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest
 class JwtTokenProvider(private val userDetailsService: UserDetailsService) {
     private val secretKey = "TESTKEYAaksjdfklasj123819032812uofsdjakflasdf"
     // 단위는 ms
-    private val tokenValidTime =30 * 60 * 1000L
+    private val tokenValidTime = 30 * 60 * 1000L * 60 * 30
     private val key: Key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey))
 
     fun createToken(email: String): String {
@@ -35,7 +35,8 @@ class JwtTokenProvider(private val userDetailsService: UserDetailsService) {
 
     fun getEmail(token: String): String {
         val parser = Jwts.parserBuilder().setSigningKey(key).build()
-        return parser.parseClaimsJwt(token).body.subject
+        val claims = parser.parse(token).body as Claims
+        return claims.subject
     }
 
     fun getAuthentication(token: String): Authentication {
@@ -51,9 +52,8 @@ class JwtTokenProvider(private val userDetailsService: UserDetailsService) {
     // 토큰의 유효성 + 만료일자 확인
     fun validateToken(jwtToken: String): Boolean {
         return try {
-            val parser = Jwts.parserBuilder().setSigningKey(key).build()
-            val claims = parser.parseClaimsJwt(jwtToken)
-            !claims.body.expiration.before(Date()) // return 생략
+            val body: Claims = Jwts.parserBuilder().setSigningKey(key).build().parse(jwtToken).body as Claims
+            return !body.expiration.before(Date()) // return 생략
         } catch (e: Exception) {
             false // return 생략
         }
