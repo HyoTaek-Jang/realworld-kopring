@@ -16,13 +16,13 @@ class AuthController(val authService: AuthService, val jwtTokenProvider: JwtToke
 
     @PostMapping("/api/users")
     fun register(@RequestBody registerRequest: RegisterRequest): BaseResponse<Member> {
-        return BaseResponse(authService.register(registerRequest.member), null, 201)
+        return BaseResponse(authService.register(registerRequest.member), 201)
     }
 
     @PostMapping("/api/users/login")
     fun login(@RequestBody loginRequest: LoginRequest): BaseResponse<MemberResponse> {
         val member = authService.login(loginRequest.member)
         val token = jwtTokenProvider.createToken(member.email)
-        return BaseResponse(MemberResponse(MemberResponse.Member(member, token)), null, 200)
+        return BaseResponse(MemberResponse(MemberResponse.Member(member, token)), 200)
     }
 }
