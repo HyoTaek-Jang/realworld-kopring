@@ -1,6 +1,6 @@
 package com.kopring.realworld.auth.dto.response
 
-import com.kopring.realworld.domain.auth.db.entity.Member
+import com.kopring.realworld.domain.member.db.entity.Member
 
 class UsersResponse(val email: String, val token: String?, val userName: String, val bio: String?, val image: String?){
     constructor(member: Member) : this(member.email, null, member.userName, null, null)

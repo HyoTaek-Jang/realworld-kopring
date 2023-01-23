@@ -1,11 +1,11 @@
 package com.kopring.realworld.auth.service
 
-import com.kopring.realworld.domain.auth.db.entity.Member
-import com.kopring.realworld.domain.auth.db.repository.MemberRepository
-import com.kopring.realworld.domain.auth.dto.request.RegisterMember
-import com.kopring.realworld.domain.auth.dto.request.RegisterRequest
-import com.kopring.realworld.domain.auth.exception.ExistUserException
-import com.kopring.realworld.domain.auth.service.AuthService
+import com.kopring.realworld.domain.member.db.entity.Member
+import com.kopring.realworld.domain.member.db.repository.MemberRepository
+import com.kopring.realworld.domain.member.dto.request.RegisterMember
+import com.kopring.realworld.domain.member.dto.request.RegisterRequest
+import com.kopring.realworld.domain.member.exception.ExistUserException
+import com.kopring.realworld.domain.member.service.AuthService
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName

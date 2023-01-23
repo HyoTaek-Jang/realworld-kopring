@@ -1,8 +1,8 @@
-package com.kopring.realworld.domain.auth.service
+package com.kopring.realworld.domain.member.service
 
-import com.kopring.realworld.domain.auth.db.entity.Member
-import com.kopring.realworld.domain.auth.db.repository.MemberRepository
-import com.kopring.realworld.domain.auth.exception.NotExistUserException
+import com.kopring.realworld.domain.member.db.entity.Member
+import com.kopring.realworld.domain.member.db.repository.MemberRepository
+import com.kopring.realworld.domain.member.exception.NotExistUserException
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.UserDetails

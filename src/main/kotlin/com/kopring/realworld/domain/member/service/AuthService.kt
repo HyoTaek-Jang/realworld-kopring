@@ -1,12 +1,12 @@
-package com.kopring.realworld.domain.auth.service
+package com.kopring.realworld.domain.member.service
 
-import com.kopring.realworld.domain.auth.db.entity.Member
-import com.kopring.realworld.domain.auth.db.repository.MemberRepository
-import com.kopring.realworld.domain.auth.dto.request.LoginMember
-import com.kopring.realworld.domain.auth.dto.request.RegisterMember
-import com.kopring.realworld.domain.auth.exception.ExistUserException
-import com.kopring.realworld.domain.auth.exception.NotExistUserException
-import com.kopring.realworld.domain.auth.exception.NotMatchPasswordException
+import com.kopring.realworld.domain.member.db.entity.Member
+import com.kopring.realworld.domain.member.db.repository.MemberRepository
+import com.kopring.realworld.domain.member.dto.request.LoginMember
+import com.kopring.realworld.domain.member.dto.request.RegisterMember
+import com.kopring.realworld.domain.member.exception.ExistUserException
+import com.kopring.realworld.domain.member.exception.NotExistUserException
+import com.kopring.realworld.domain.member.exception.NotMatchPasswordException
 import org.springframework.stereotype.Service
 
 @Service

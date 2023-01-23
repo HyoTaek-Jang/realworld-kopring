@@ -1,10 +1,10 @@
-package com.kopring.realworld.domain.auth.controller
+package com.kopring.realworld.domain.member.controller
 
-import com.kopring.realworld.domain.auth.dto.request.LoginRequest
-import com.kopring.realworld.domain.auth.dto.request.RegisterRequest
-import com.kopring.realworld.domain.auth.dto.response.MemberResponse
+import com.kopring.realworld.domain.member.dto.request.LoginRequest
+import com.kopring.realworld.domain.member.dto.request.RegisterRequest
+import com.kopring.realworld.domain.member.dto.response.MemberResponse
 import com.kopring.realworld.auth.dto.response.UsersResponse
-import com.kopring.realworld.domain.auth.service.AuthService
+import com.kopring.realworld.domain.member.service.AuthService
 import com.kopring.realworld.global.dto.BaseResponse
 import com.kopring.realworld.global.jwt.JwtTokenProvider
 import org.springframework.web.bind.annotation.PostMapping
