@@ -1,6 +1,6 @@
-package com.kopring.realworld.auth.dto.request
+package com.kopring.realworld.domain.auth.dto.request
 
-import com.kopring.realworld.auth.db.entity.Member
+import com.kopring.realworld.domain.auth.db.entity.Member
 
 class RegisterRequest(val member: RegisterMember)
 class RegisterMember(val email: String, val password: String, val userName: String){

@@ -1,4 +1,4 @@
-package com.kopring.realworld.auth.exception
+package com.kopring.realworld.domain.auth.exception
 
 import com.kopring.realworld.global.exception.BaseException
 

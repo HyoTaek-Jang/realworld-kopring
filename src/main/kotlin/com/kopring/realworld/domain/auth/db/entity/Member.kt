@@ -1,4 +1,4 @@
-package com.kopring.realworld.auth.db.entity
+package com.kopring.realworld.domain.auth.db.entity
 
 import com.kopring.realworld.global.audit.AuditBase
 import javax.persistence.*
