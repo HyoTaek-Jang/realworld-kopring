@@ -2,6 +2,7 @@ package com.kopring.realworld.auth.service
 
 import com.kopring.realworld.auth.db.entity.Member
 import com.kopring.realworld.auth.db.repository.MemberRepository
+import com.kopring.realworld.auth.dto.request.RegisterMember
 import com.kopring.realworld.auth.dto.request.RegisterRequest
 import com.kopring.realworld.auth.exception.ExistUserException
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
@@ -22,14 +23,15 @@ internal class AuthServiceTest{
     @InjectMocks
     lateinit var authService: AuthService
 
-    private val registerRequest = RegisterRequest(Member("test@test.com", "pwd", "taek"))
+    private val registerRequest = RegisterRequest(RegisterMember("test@test.com", "pwd", "taek"))
+    private val member = registerRequest.member
 
     @Test
     @DisplayName("중복 아이디가 없으면 정상 가입된다.")
     fun hasNotExistEmailTest() {
         // given
-        `when`(memberRepository.findByEmail(registerRequest.member.email)).thenReturn(null)
-        `when`(memberRepository.save(any())).thenReturn(registerRequest.member)
+        `when`(memberRepository.findByEmail(member.email)).thenReturn(null)
+        `when`(memberRepository.save(any())).thenReturn(Member(member.email, member.password, member.userName))
 
         // then
         assertThat(authService.register(registerRequest.member)).isNotNull
@@ -39,7 +41,7 @@ internal class AuthServiceTest{
     @DisplayName("중복 아이디가 있으면 exception이 발생한다.")
     fun hasExistEmailTest() {
         // given
-        `when`(memberRepository.findByEmail(registerRequest.member.email)).thenReturn(registerRequest.member)
+        `when`(memberRepository.findByEmail(registerRequest.member.email)).thenReturn(Member(member.email, member.password, member.userName))
 
         // then
         assertThatThrownBy { authService.register(registerRequest.member) }
