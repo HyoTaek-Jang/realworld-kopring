@@ -16,7 +16,7 @@ class UserDetailsService(val memberRepository: MemberRepository) : UserDetailsSe
         return UserDetailCustom(member)
     }
 
-    class UserDetailCustom(private val member: Member) : UserDetails {
+    class UserDetailCustom(val member: Member) : UserDetails {
         private var enabled: Boolean = true
 
         override fun getAuthorities(): MutableCollection<out GrantedAuthority> = AuthorityUtils.createAuthorityList()
