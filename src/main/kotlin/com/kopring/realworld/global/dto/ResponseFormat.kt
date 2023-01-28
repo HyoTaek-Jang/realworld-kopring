@@ -7,4 +7,3 @@ class UsersResponse(val email: String, val token: String?, val userName: String,
     constructor(member: Member, token: String) : this(member.email, token, member.userName, null, null)
 }
 
-class profile(val userName: String, val bio: String, val image: String, val following: String)
