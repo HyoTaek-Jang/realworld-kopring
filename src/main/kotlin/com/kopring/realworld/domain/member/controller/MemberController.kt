@@ -5,6 +5,7 @@ import com.kopring.realworld.domain.member.dto.request.UpdateMemberRequest
 import com.kopring.realworld.domain.member.dto.response.MemberResponse
 import com.kopring.realworld.domain.member.service.MemberService
 import com.kopring.realworld.global.dto.BaseResponse
+import com.kopring.realworld.global.jwt.SecurityUtils.Companion.getPrincipalMember
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -17,7 +18,7 @@ class MemberController(val memberService: MemberService) {
 
     @GetMapping
     fun getCurrentMember(): BaseResponse<MemberResponse> {
-        return BaseResponse(MemberResponse(UsersResponse(memberService.getCurrentMember())), 200)
+        return BaseResponse(MemberResponse(UsersResponse(getPrincipalMember())), 200)
     }
 
     @PutMapping

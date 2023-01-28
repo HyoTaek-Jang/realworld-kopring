@@ -32,7 +32,7 @@ internal class AuthServiceTest{
     fun hasNotExistEmailTest() {
         // given
         `when`(memberRepository.findByEmail(member.email)).thenReturn(null)
-        `when`(memberRepository.save(any())).thenReturn(Member(member.email, member.password, member.userName))
+        `when`(memberRepository.save(any())).thenReturn(Member(member.email, member.password, member.userName, null, null))
 
         // then
         assertThat(authService.register(registerRequest.member)).isNotNull
@@ -42,7 +42,7 @@ internal class AuthServiceTest{
     @DisplayName("중복 아이디가 있으면 exception이 발생한다.")
     fun hasExistEmailTest() {
         // given
-        `when`(memberRepository.findByEmail(registerRequest.member.email)).thenReturn(Member(member.email, member.password, member.userName))
+        `when`(memberRepository.findByEmail(registerRequest.member.email)).thenReturn(Member(member.email, member.password, member.userName, null, null))
 
         // then
         assertThatThrownBy { authService.register(registerRequest.member) }
