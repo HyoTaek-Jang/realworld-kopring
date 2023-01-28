@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface FollowRepository : JpaRepository<Follow, Long> {
     fun findByFromAndTo(from: Member, to: Member): Follow?
+    fun deleteByFromAndTo(principalMember: Member, targetMember: Member): Int
 }
