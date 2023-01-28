@@ -1,6 +1,7 @@
 package com.kopring.realworld.domain.member.service
 
 import com.kopring.realworld.auth.dto.response.ProfileResponse
+import com.kopring.realworld.domain.member.db.entity.Follow
 import com.kopring.realworld.domain.member.db.repository.FollowRepository
 import com.kopring.realworld.domain.member.db.repository.MemberRepository
 import com.kopring.realworld.domain.member.exception.NotExistUserException
@@ -15,5 +16,11 @@ class ProfilesService(val memberRepository: MemberRepository, val followReposito
         val isFollowing = followRepository.findByFromAndTo(getPrincipalMember(), targetMember) != null
 
         return ProfileResponse(targetMember, isFollowing)
+    }
+
+    fun followMember(userName: String): ProfileResponse {
+        val targetMember = memberRepository.findByUserName(userName) ?: throw NotExistUserException()
+        followRepository.save(Follow(getPrincipalMember(), targetMember))
+        return ProfileResponse(targetMember, true)
     }
 }
