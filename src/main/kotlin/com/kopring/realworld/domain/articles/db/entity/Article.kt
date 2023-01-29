@@ -11,9 +11,9 @@ import javax.persistence.ManyToOne
 
 @Entity
 class Article(
-    val slug: String,
+    val slug: String?,
     @Column(nullable = false) val title: String,
-    val description: String,
+    val description: String?,
     @Column(nullable = false, columnDefinition = "TEXT") val body: String,
     @ManyToOne val author: Member
 ) : AuditBase() {
