@@ -1,6 +1,6 @@
 package com.kopring.realworld.domain.member.controller
 
-import com.kopring.realworld.auth.dto.response.ProfileResponse
+import com.kopring.realworld.domain.member.dto.response.ProfileResponse
 import com.kopring.realworld.domain.member.service.ProfilesService
 import com.kopring.realworld.global.dto.BaseResponse
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -16,16 +16,16 @@ class ProfilesController(val profilesService: ProfilesService) {
 
     @GetMapping("/{userName}")
     fun getProfiles(@PathVariable userName: String): BaseResponse<ProfileResponse> {
-        return BaseResponse(profilesService.getProfile(userName), 200)
+        return BaseResponse(ProfileResponse(profilesService.getProfile(userName)), 200)
     }
 
     @PostMapping("/{userName}/follow")
     fun followMember(@PathVariable userName: String): BaseResponse<ProfileResponse> {
-        return BaseResponse(profilesService.followMember(userName), 201)
+        return BaseResponse(ProfileResponse(profilesService.followMember(userName)), 201)
     }
 
     @DeleteMapping("/{userName}/follow")
     fun unfollowMember(@PathVariable userName: String): BaseResponse<ProfileResponse> {
-        return BaseResponse(profilesService.unfollowMember(userName), 201)
+        return BaseResponse(ProfileResponse(profilesService.unfollowMember(userName)), 201)
     }
 }

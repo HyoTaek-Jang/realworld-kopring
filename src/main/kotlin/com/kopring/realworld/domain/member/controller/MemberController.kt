@@ -1,6 +1,6 @@
 package com.kopring.realworld.domain.member.controller
 
-import com.kopring.realworld.auth.dto.response.UsersResponse
+import com.kopring.realworld.auth.dto.response.UsersDto
 import com.kopring.realworld.domain.member.dto.request.UpdateMemberRequest
 import com.kopring.realworld.domain.member.dto.response.MemberResponse
 import com.kopring.realworld.domain.member.service.MemberService
@@ -18,11 +18,11 @@ class MemberController(val memberService: MemberService) {
 
     @GetMapping
     fun getCurrentMember(): BaseResponse<MemberResponse> {
-        return BaseResponse(MemberResponse(UsersResponse(getPrincipalMember())), 200)
+        return BaseResponse(MemberResponse(UsersDto(getPrincipalMember())), 200)
     }
 
     @PutMapping
     fun updateMember(@RequestBody updateMemberRequest: UpdateMemberRequest): BaseResponse<MemberResponse> {
-        return BaseResponse(MemberResponse(UsersResponse(memberService.updateMember(updateMemberRequest))), 201)
+        return BaseResponse(MemberResponse(UsersDto(memberService.updateMember(updateMemberRequest))), 201)
     }
 }

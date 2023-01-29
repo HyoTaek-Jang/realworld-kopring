@@ -3,7 +3,7 @@ package com.kopring.realworld.domain.member.controller
 import com.kopring.realworld.domain.member.dto.request.LoginRequest
 import com.kopring.realworld.domain.member.dto.request.RegisterRequest
 import com.kopring.realworld.domain.member.dto.response.MemberResponse
-import com.kopring.realworld.auth.dto.response.UsersResponse
+import com.kopring.realworld.auth.dto.response.UsersDto
 import com.kopring.realworld.domain.member.service.AuthService
 import com.kopring.realworld.global.dto.BaseResponse
 import com.kopring.realworld.global.jwt.JwtTokenProvider
@@ -18,13 +18,13 @@ class AuthController(val authService: AuthService, val jwtTokenProvider: JwtToke
 
     @PostMapping
     fun register(@RequestBody registerRequest: RegisterRequest): BaseResponse<MemberResponse> {
-        return BaseResponse(MemberResponse(UsersResponse(authService.register(registerRequest.member))), 201)
+        return BaseResponse(MemberResponse(UsersDto(authService.register(registerRequest.member))), 201)
     }
 
     @PostMapping("/login")
     fun login(@RequestBody loginRequest: LoginRequest): BaseResponse<MemberResponse> {
         val member = authService.login(loginRequest.member)
         val token = jwtTokenProvider.createToken(member.email)
-        return BaseResponse(MemberResponse(UsersResponse(member, token)), 200)
+        return BaseResponse(MemberResponse(UsersDto(member, token)), 200)
     }
 }
