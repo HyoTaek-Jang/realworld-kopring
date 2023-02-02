@@ -1,5 +1,6 @@
 package com.kopring.realworld.domain.articles.db.entity
 
+import com.kopring.realworld.domain.articles.dto.request.UpdateArticle
 import com.kopring.realworld.domain.member.db.entity.Member
 import com.kopring.realworld.global.audit.AuditBase
 import javax.persistence.Column
@@ -11,12 +12,18 @@ import javax.persistence.ManyToOne
 
 @Entity
 class Article(
-    val slug: String?,
-    @Column(nullable = false) val title: String,
-    val description: String?,
-    @Column(nullable = false, columnDefinition = "TEXT") val body: String,
+    @Column(nullable = false, unique = true) var slug: String,
+    @Column(nullable = false) var title: String,
+    var description: String?,
+    @Column(nullable = false, columnDefinition = "TEXT") var body: String,
     @ManyToOne val author: Member
 ) : AuditBase() {
+    fun update(updateArticle: UpdateArticle, slug: String) {
+        title = updateArticle.title ?: title
+        description = updateArticle.description ?: description
+        body = updateArticle.body ?: body
+        this.slug = slug
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
