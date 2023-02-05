@@ -9,6 +9,7 @@ import com.kopring.realworld.domain.articles.dto.request.CreateArticle
 import com.kopring.realworld.domain.articles.dto.request.UpdateArticle
 import com.kopring.realworld.global.jwt.SecurityUtils.Companion.getPrincipalMember
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ArticleService(val articleRepository: ArticleRepository, val tagRepository: TagRepository) {
@@ -29,5 +30,10 @@ class ArticleService(val articleRepository: ArticleRepository, val tagRepository
         val tagList = tagRepository.findAllByArticle(article)?.map { it.name }
 
         return SingleArticleDto(article, getPrincipalMember(), tagList)
+    }
+
+    @Transactional
+    fun deleteArticle(slug: String) {
+        articleRepository.deleteBySlug(slug)
     }
 }

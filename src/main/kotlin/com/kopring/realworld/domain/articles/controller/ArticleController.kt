@@ -5,6 +5,7 @@ import com.kopring.realworld.domain.articles.dto.request.UpdateArticleRequest
 import com.kopring.realworld.domain.articles.dto.response.SingleArticleResponse
 import com.kopring.realworld.domain.articles.service.ArticleService
 import com.kopring.realworld.global.dto.BaseResponse
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -24,6 +25,12 @@ class ArticleController(val articleService: ArticleService) {
     @PutMapping("/{slug}")
     fun updateArticle(@PathVariable slug: String, @RequestBody updateArticleRequest: UpdateArticleRequest): BaseResponse<SingleArticleResponse> {
         return BaseResponse(SingleArticleResponse(articleService.updateArticle(slug, updateArticleRequest.article)), 201)
+    }
+
+    @DeleteMapping("/{slug}")
+    fun deleteArticle(@PathVariable slug: String): BaseResponse<String> {
+        articleService.deleteArticle(slug)
+        return BaseResponse("Article 삭제를 완료했습니다.", 201)
     }
 
 }
