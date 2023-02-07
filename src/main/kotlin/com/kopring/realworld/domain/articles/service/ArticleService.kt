@@ -27,13 +27,16 @@ class ArticleService(val articleRepository: ArticleRepository, val tagRepository
         article.update(updateArticleRequest, slug)
         articleRepository.save(article)
 
-        val tagList = tagRepository.findAllByArticle(article)?.map { it.name }
-
-        return SingleArticleDto(article, getPrincipalMember(), tagList)
+        return SingleArticleDto(article, getPrincipalMember(), tagRepository.findAllByArticle(article)?.map { it.name })
     }
 
     @Transactional
     fun deleteArticle(slug: String) {
         articleRepository.deleteBySlug(slug)
+    }
+
+    fun getArticle(slug: String): SingleArticleDto {
+        val article = articleRepository.findBySlug(slug) ?: throw NotExistArticleException()
+        return SingleArticleDto(article, getPrincipalMember(), tagRepository.findAllByArticle(article)?.map { it.name })
     }
 }
